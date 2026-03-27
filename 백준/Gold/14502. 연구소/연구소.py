@@ -5,7 +5,6 @@ n, m = map(int, s.readline().split())
 
 graph = [list(map(int, s.readline().split())) for _ in range(n)]
 
-empty = []
 virus = []
 
 #바이러스 위치 확인
@@ -13,8 +12,6 @@ for i in range(n):
     for j in range(m):
         if graph[i][j] == 2:
             virus.append((i,j))
-        elif graph[i][j] == 0:
-            empty.append((i,j))
 
 def bfs():
     queue = deque(virus)
