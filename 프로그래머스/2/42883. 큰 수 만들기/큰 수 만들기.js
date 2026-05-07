@@ -1,5 +1,9 @@
- 
-// 항상 최적의 해를 찾는것이 핵심
+// 그리디 알고리즘
+// 쉽게 말하면 매순간 현재 상황에서 항상 최적의 해를 찾는것이 핵심
+// 부분적인 최선의 해를 전체의 최선의 해이길 바라면서 동작
+// 전체 최적해를 보장하지 않음
+
+// 현재 문제에서
 // 가장 큰수를 만드는게 목적
 // 가장 큰수를 만드는 방법은 가장큰 첫번째 자리수를 찾아야함
 // maxNum을 찾아서 앞의 숫자를 다 지워버리면 가능
@@ -8,35 +12,35 @@
 // 큰수앞의 숫자를 모두 제거했으면
 // 뒤의 남은 숫자들중에서 큰수를 찾아 제거하는 방식을 무한 반복
 // 최선의 선택하나를 잡아서 최적의 해에 도달하는것이 그리디
-    
-// function solution(number, k) {
-//     let answer = '';
-//     let startIndex = 0; // 탐색을 시작할 위치
-//     const targetLength = number.length - k; // 만들어야 하는 숫자의 길이
 
-//     // 목표 길이를 채울 때까지 반복 (그리디: 매 순간 최선의 수 선택)
-//     for (let i = 0; i < targetLength; i++) {
-//         let maxDigit = '0';
-//         let maxIndex = startIndex;
+function solution(number, k) {
+    let answer = '';
+    let startIndex = 0; // 탐색을 시작할 위치
+    const targetLength = number.length - k; // 만들어야 하는 숫자의 길이
 
-//         // 주석 내용: maxNum의 앞의 숫자가 k보다 많으면 안 되므로 범위를 제한함
-//         // 탐색 범위: startIndex부터 (전체 길이 - 남은 목표 길이)까지
-//         for (let j = startIndex; j <= k + i; j++) {
-//             if (number[j] > maxDigit) {
-//                 maxDigit = number[j];
-//                 maxIndex = j;
-//                 if (maxDigit === '9') break; // 9는 최댓값이므로 바로 탈출(최적화)
-//             }
-//         }
+    // 목표 길이를 채울 때까지 반복 (그리디: 매 순간 최선의 수 선택)
+    for (let i = 0; i < targetLength; i++) {
+        let maxDigit = '0';
+        let maxIndex = startIndex;
+
+        // 주석 내용: maxNum의 앞의 숫자가 k보다 많으면 안 되므로 범위를 제한함
+        // 탐색 범위: startIndex부터 (전체 길이 - 남은 목표 길이)까지
+        for (let j = startIndex; j <= k + i; j++) {
+            if (number[j] > maxDigit) {
+                maxDigit = number[j];
+                maxIndex = j;
+                if (maxDigit === '9') break; // 9는 최댓값이므로 바로 탈출(최적화)
+            }
+        }
         
-//         answer += maxDigit;
-//         startIndex = maxIndex + 1; // 찾은 큰 수의 다음부터 다시 탐색
-//     }
+        answer += maxDigit;
+        startIndex = maxIndex + 1; // 찾은 큰 수의 다음부터 다시 탐색
+    }
 
-//     return answer;
-// }
+    return answer;
+}
         
-    
+// 위의 방식으로도 그리드의 구현은 가능 하지만
 // 최적화 부분에서 매번 최대값을 찾는 반복을 진행하게 된다면 O(n^2)이 발생할 수 있기 때문에
 // 효율적으로 구성할 수 있는 방안중 하나인 스택을 이용하면 된다.
 // 하나의 스택에 숫자를 넣고 이후에 들어오는 숫자가 크면 앞의 숫자는 버리는 방식으로 진행
