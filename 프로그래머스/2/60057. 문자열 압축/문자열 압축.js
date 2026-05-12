@@ -7,7 +7,7 @@ function solution(s) {
     // 몇개 단위로 끊을지 -> 끊었을때 길이 반환하는 함수
     if (s.length == 1) return 1
     else {
-        for (let i = 1; i < s.length; i++)
+        for (let i = 1; i <= s.length/2; i++)
             answer = Math.min(answer, countNewArray(s, i));
     }
     
